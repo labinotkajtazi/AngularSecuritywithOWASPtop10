@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    <h4 class="mark"><strong>-Injection-</strong></h4>
+    <p class="text-info"><strong>SQL injection</strong> doesnt really apply to front end frameworks such as Angular, because the protection against SQL injection must be 
+      implemented on the back end. One way to defend from SQL Injection is by using SQL Parameters. SQL parameters are values that are added to an SQL query
+       at execution time, in a controlled manner. Below you will find a form with an input which is validated through a white list even though this approach is still 
+       vulnerable to SQL Injection to a certain degree.
+    </p>
+    <br>
+    <p class="text-info"><strong>Template Injection</strong> however is another issue which affects Angular. This type of injection vulnerabilities arise when 
+      applications using a client-side template framework dynamically embed user input in web pages. When a web page is rendered, the framework will scan the page 
+      for template expressions, and execute any that it encounters. An attacker can exploit this by supplying a malicious template expression that launches a cross-site 
+      scripting (XSS) attack.
+    </p>
+    <br>
+    <h4 class="mark"><strong>-Code used to validate input-</strong></h4>
+    <pre class="text-info">
+    validText: string[] = ['example','angular','owasp','security'];
+    isInjection: boolean = true;
+
+    checkValidity()&#123;
+        if(!this.validText.includes(this.searchText.toLowerCase()) && this.isValid === true)
+        &#123;
+          this.isInjection = true;
+        &#125;
+        else if(this.validText.includes(this.searchText.toLowerCase()) && this.isValid === true)
+        &#123;
+          this.isInjection = false;
+        &#125;
+        else if(this.searchText === '')
+        &#123;
+          this.isValid = false;
+          this.isInjection = true;
+        &#125; 
+      &#125;
+        <!-- &#123; path: &#39;&#39;, redirectTo: &#39;/home&#39;, pathMatch: &#39;full&#39; &#125;,
+        &#123; path: &#39;home&#39;, component: HomeComponent &#125;,
+        &#123; path: &#39;login&#39;, component: LoginComponent, canActivate: [RegisterLoginGuard] &#125;]; -->
+    </pre>
+    <br>
+    <h4 class="mark"><strong>-Input Validation Example-</strong></h4>
+    <p class="text-info"><strong>WhiteListed Words</strong></p>
+    <ul class="list-group">
+      <li class="list-group-item"><i class="glyphicon glyphicon-circle-arrow-right"></i> security</li>
+      <li class="list-group-item"><i class="glyphicon glyphicon-circle-arrow-right"></i> angular</li>
+      <li class="list-group-item"><i class="glyphicon glyphicon-circle-arrow-right"></i> owasp</li>
+      <li class="list-group-item"><i class="glyphicon glyphicon-circle-arrow-right"></i> example</li>
+  </ul>
+    <form #f="ngForm">
+        <div class="form-group">
+          <label for="SearchText">Whitelisted Search Text</label>
+          <input type="text" id="SearchText" name="SearchText" [(ngModel)]="searchText" class="form-control" 
+          required #SearchText="ngModel">
+          <span class="help-block text-danger" *ngIf="!SearchText.valid && SearchText.touched || !isValid">Please enter a valid search text!</span>
+          <span class="help-block text-danger" *ngIf="isInjection">This text contains injection possibility!</span>
+          <span class="help-block text-success" *ngIf="!isInjection">This text is validated</span>
+        </div> 
+        <button class="btn btn-success" type="submit" [disabled]="!f.valid" (click)="checkValidity()">Check Validity</button>
+    </form>
+  </div>
+</div>
+<br>
+<br>
+<br>

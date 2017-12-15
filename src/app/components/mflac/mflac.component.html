@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    <h4 class="mark"><strong>-Missing Function Level Access Control-</strong></h4>
+    <p class="text-info">Applications are vulnerable to this type of security threat when unauthorized users can make requests/access parts of the web Application
+      they are not supposed to. In order to prevent such attacks, developers must make sure unauthorized users do not have access to restricted parts through UI or directly
+      from URL. Angular provides protection to this type of attack through its routing and authguard modules, but its implementation must be made by the developer, and further 
+      checks for authorization must also be made on the back end.
+    </p>
+    <br>
+    <h4 class="mark"><strong>-Routing Code used to prevent unauthorized requests-</strong></h4>
+    <pre class = "text-info"> Routes = [
+        &#123; path: &#39;&#39;, redirectTo: &#39;/home&#39;, pathMatch: &#39;full&#39; &#125;,
+        &#123; path: &#39;home&#39;, component: HomeComponent &#125;,
+        &#123; path: &#39;login&#39;, component: LoginComponent, canActivate: [RegisterLoginGuard] &#125;];
+    </pre>
+    <p class="text-info">among other lines</p>
+    <br>
+    <h4 class="mark"><strong>-Route Guarding Example-</strong></h4>
+    <p class="text-info"><strong>Guarded paths (Require user to be logged in)</strong></p>
+    <ul class="list-group">
+      <li class="list-group-item"><i class="glyphicon glyphicon-remove"></i> CSRF </li>
+      <li class="list-group-item"><i class="glyphicon glyphicon-remove"></i> MFLAC </li>
+  </ul>
+    <p class="text-info">Try </p>
+  </div>
+</div>
+<br>

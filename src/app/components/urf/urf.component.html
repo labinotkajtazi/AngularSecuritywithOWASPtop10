@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    <h4 class="mark"><strong>-Unvalidated Redirects and Forwards-</strong></h4>
+    <p class="text-info">If you have created a web application chances are there are going to be links redirecting to other pages or other areas within the same page.
+      This leaves space for unwanted action from attackers, such as changing the link and redirecting users to malicious websites etc. In order to prevent this behaviour 
+      it falls on the developers to make sure they do not use actual URL's but instead an ID or other value which is mapped and translated in the back so that the redirect 
+      can only be within a finite number of trusted URL's.
+    </p>
+    <br>
+    <h4 class="mark"><strong>-Code Responsible-</strong></h4>
+    <pre class="text-info">
+        <b>Wrong</b> - &#60;a href="http://localhost:4200/home"&gt;Redirect to Home&lt;/a&gt;
+        <hr>
+        <b>Right</b> - 
+        <b>HTML part</b>
+        &#60;a [routerLink] ="[getLink('2')]"&gt;Redirect to Home&lt;/a&gt;
+
+        <b>Typescript part</b>
+        links = [
+           &#123; id:&#39;1&#39;, value: &#39;../uckv&#39; &#125;,
+           &#123; id:&#39;2&#39;, value:&#39;../home&#39; &#125;
+        ];
+    
+        getLink(url: string) &#123;
+          return (this.links.find(i => i.id === url)).value;
+        &#125;
+    </pre>
+    
+    <br>
+    <h4 class="mark"><strong>-Examples-</strong></h4>
+    <p class="text-info">Link with exploit possibility - <a href="http://localhost:4200/home" class="bg-danger">Redirect to Home</a></p>
+    <p class="text-info">Link without exploit possibility - <a [routerLink] ="[getLink('2')]" class="bg-success">Redirect to Home</a></p>
+  </div>
+</div>
+<br>

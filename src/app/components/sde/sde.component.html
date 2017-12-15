@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    <h4 class="mark"><strong>-Sensitive Data Exposure-</strong></h4>
+    <p class="text-info">Sensitive Data Exposure occurs when certain sensitive data is saved in local storage, therefore leaving a security hole which enables other users to have access to that information
+      One way to do this is to store data in the javascript local storage, which would save said data locally permanently unless removed manually.
+    </p>
+    <br>
+    <h4 class="mark"><strong>-The Code responsible for such behaviour-</strong></h4>  
+    <!-- <p class="text-info">public lStorageVar: string = "";</p>
+    <p class="text-info">localStorage.setItem('localVar', JSON.stringify(this.lStorageVar));</p>
+    <p class="text-info">this.lStorageVar = JSON.parse(localStorage.getItem('localVar'));</p> -->
+    <pre class="text-info">
+    <strong>Saving to local storage:</strong>
+        public lStorageVar: string = "";
+        localStorage.setItem('localVar', JSON.stringify(this.lStorageVar));
+        this.lStorageVar = JSON.parse(localStorage.getItem('localVar'));
+        <br>
+    <strong>Clearing local storage</strong>
+        localStorage.clear();
+        this.lStorageVar = JSON.parse(localStorage.getItem('localVar'));
+    </pre>
+    <br>
+    <p class="text-info">Below is an example of such conduct. </p>
+    <form (ngSubmit)="SaveToLocalStorage()" #f="ngForm">
+          <div class="form-group">
+            <label for="localStorageVar">Local Storage Value</label>
+            <input type="text" id="lStorageVar" name="lStorageVar" [(ngModel)]="lStorageVar" class="form-control">
+          </div> 
+          <button class="btn btn-success" type="submit">Save</button>
+          <button class="btn btn-danger" (click)="ClearLocalStorage()">Delete</button>
+      </form>
+  </div>
+</div>
+<br>

@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <h4 class="text-danger"><mark><strong>-Cross Site Scripting-</strong></mark></h4>
+      <p class="text-info">Cross site scripting is the biggest issue with angular applications since angular is entirely built on javascript. Typescript is actually
+        the language angular uses, but typescript is a javascript typed superset which compiles to plain javascript. Cross site scripting occurs if proper sanitazation is 
+      not in place, or because of a security missconfiguration leading to the attacker having access to the application. Angular has protection against XSS by default, but 
+      you can turn it off through different commands. Some of them are mirrored in the below section.</p>
+      <br>
+      <h4 class="text-danger"><mark><strong>-Code Responsible-</strong></mark></h4>
+      <pre class="text-info">
+        public dangerousUrl;
+        public trustedUrl;
+        HtmlSnippet = 'Template &lt;script&gt;alert("0wned")&lt;/script&gt; &lt;b&gt;Syntax&lt;/b&gt;';
+        
+        constructor(private sanitizer: DomSanitizer) &#123;
+          this.dangerousUrl = 'javascript:alert("Hi there")';
+          this.trustedUrl = sanitizer.bypassSecurityTrustUrl(this.dangerousUrl);
+        &#125;
+      </pre>
+      <br>
+      <h4 class="text-danger"><mark><strong>-Examples-</strong></mark></h4>
+      <strong>Binding values in the right and the wrong way</strong>
+      <p class="text-info"><strong>Right</strong> way with string interpolation <kbd>&#123;&#123; HtmlSnippet &#125;&#125;</kbd></p>
+      <p class="e2e-inner-html-interpolated text-success">{{htmlSnippet}}</p>
+      <p class="text-info"><strong>Wrong</strong> way with innerHTML binding<kbd>[innerHTML]="HtmlSnippet"</kbd></p>
+      <p class="e2e-inner-html-bound text-danger" [innerHTML]="htmlSnippet"></p>
+      <br>
+      <h4 class="text-success">An untrusted URL:</h4>
+      <p class="text-success"><a class="e2e-dangerous-url" [href]="dangerousUrl">Click me</a></p>
+      <h4 class="text-danger">A trusted URL:</h4>
+      <p class="text-danger"><a class="e2e-trusted-url" [href]="trustedUrl">Click me</a></p>
+  </div>
+</div>
+<br>
